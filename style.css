@@ -48,19 +48,87 @@ img {
   text-align: left;
 }
 
-.profile-header h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1e293b;
-  letter-spacing: -0.05em;
-  margin-bottom: 8px;
+.profile-content {
+  margin-top: 30px;
 }
 
-.profile-header h2 {
+.profile-section {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.profile-section h3 {
   font-size: 1.25rem;
-  font-weight: 400;
-  color: var(--accent-color);
+  font-weight: 600;
+  color: #1e293b;
+  border-left: 4px solid var(--accent-color);
+  padding-left: 12px;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.experience-item {
   margin-bottom: 20px;
+}
+
+.experience-item h4 {
+  font-size: 1.2rem;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+.experience-item .uni {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #155724;
+  background-color: #dcfce7;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  margin-top: 20px;
+}
+
+.experience-item .company {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--accent-color);
+  background-color: var(--accent-light);
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  margin-top: 20px;
+}
+
+.experience-item h4 + .company {
+  margin-top: 0;
+}
+
+.experience-item ul {
+  list-style-type: none;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.experience-item ul li {
+  position: relative;
+  margin-bottom: 8px;
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.experience-item ul li::before {
+  content: "▹";
+  color: var(--accent-color);
+  font-weight: bold;
+  position: absolute;
+  left: -18px;
+  top: 1px;
 }
 
 .profile-footer {
