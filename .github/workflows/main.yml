@@ -1,0 +1,59 @@
+name: CI/CD Pipeline - Currículo DS881
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  lint-and-build:
+    name: Linter & Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (Para o Linter)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 1. Linter / Análise Estática
+        run: |
+          npm install -g prettier
+          prettier --check "**/*.{html,css}"
+
+      - name: 2. Build / Validação do Dockerfile
+        run: docker build -t curriculo-teste .
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: lint-and-build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload dos arquivos da aplicação
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: 3. Deploy para o GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
